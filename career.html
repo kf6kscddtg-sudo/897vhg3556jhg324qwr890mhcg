@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio App - Career</title>
+    <!-- MapLibre GL CSS -->
+    <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
+    <!-- Custom Career CSS -->
+    <link href="css/career.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- Full-Width Global Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <!-- Brand Logo & Title -->
+            <a href="home.html" class="header-brand">
+                <img src="assets/logo/logo.png" alt="App Logo" class="app-logo-img">
+                <span class="header-title">Portfolio</span>
+            </a>
+
+            <!-- Desktop Global Navigation -->
+            <nav class="desktop-nav">
+                <a href="home.html" class="nav-link">Home</a>
+                <a href="career.html" class="nav-link active">Career</a>
+                <a href="education.html" class="nav-link">Education</a>
+                <a href="projects.html" class="nav-link">Projects</a>
+                <a href="certificates.html" class="nav-link">Certificates</a>
+                <a href="financial.html" class="nav-link">Financial</a>
+                <a href="minimalism.html" class="nav-link">Minimalism</a>
+            </nav>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown Navigation -->
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="home.html" class="mobile-nav-link">Home</a>
+            <a href="career.html" class="mobile-nav-link active">Career</a>
+            <a href="education.html" class="mobile-nav-link">Education</a>
+            <a href="projects.html" class="mobile-nav-link">Projects</a>
+            <a href="certificates.html" class="mobile-nav-link">Certificates</a>
+            <a href="financial.html" class="mobile-nav-link">Financial</a>
+            <a href="minimalism.html" class="mobile-nav-link">Minimalism</a>
+        </nav>
+    </header>
+
+    <!-- Main Workspace Layout -->
+    <div class="workspace-layout">
+        <!-- Left Local Navigation Panel -->
+        <div class="nav-panel">
+            <div class="panel-header">
+                <span>Career Roles</span>
+            </div>
+            <div class="nav-scroll">
+                <div class="nav-item" onclick="selectCardByRole('Lead Enterprise Architect', event)">Lead Enterprise Architect</div>
+                <div class="nav-item" onclick="selectCardByRole('AI Engineer', event)">AI Engineer</div>
+                <div class="nav-item" onclick="selectCardByRole('Senior Data Engineer', event)">Senior Data Engineer</div>
+                <div class="nav-item" onclick="selectCardByRole('Data Engineer', event)">Data Engineer</div>
+                <div class="nav-item" onclick="selectCardByRole('Data Scientist', event)">Data Scientist</div>
+                <div class="nav-item" onclick="selectCardByRole('Scientific Programmer', event)">Scientific Programmer</div>
+                <div class="nav-item" onclick="selectCardByRole('Data Analyst', event)">Data Analyst</div>
+                <div class="nav-item" onclick="selectCardByRole('Inventory Specialist', event)">Inventory Specialist</div>
+                <div class="nav-item" onclick="selectCardByRole('Medical Laboratory Technician', event)">Medical Laboratory Technician</div>
+                <div class="nav-item" onclick="selectCardByRole('US Navy Corpsman', event)">US Navy Corpsman</div>
+                <div class="nav-item" onclick="selectCardByRole('Restaurant Staff', event)">Restaurant Staff</div>
+            </div>
+        </div>
+
+        <!-- Center Container: Top Timeline Ribbon & Map Area -->
+        <div class="center-container">
+            <!-- Timeline Ribbon Panel at Top -->
+            <div class="timeline-top-container" id="timelineContainer">
+                <!-- Added Flexbox styling to force space between title and toggle -->
+                <div class="timeline-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="header-text">Career Timeline</span>
+                    
+                    <!-- Satellite Mode Toggle Switch (Pushed to Far Right) -->
+                    <div class="satellite-toggle-wrapper">
+                        <span class="satellite-toggle-label">Satellite Mode</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="satelliteModeToggle" onchange="toggleSatelliteMode(this)">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="timeline-scroll">
+                    <div class="timeline-card" onclick="updateMap('job1')" data-key="job1">
+                        <div class="timeline-year">Aug 2026 - Present</div>
+                        <div class="timeline-role">Lead Enterprise Architect</div>
+                    </div>
+
+                    <div class="timeline-card" onclick="updateMap('job2')" data-key="job2">
+                        <div class="timeline-year">Dec 2025 - Aug 2026</div>
+                        <div class="timeline-role">AI Engineer</div>
+                    </div>
+
+                    <div class="timeline-card" onclick="updateMap('job3')" data-key="job3">
+                        <div class="timeline-year">May 2024 - Aug 2025</div>
+                        <div class="timeline-role">Senior Data Engineer</div>
+                    </div>
+
+                    <div class="timeline-card" onclick="updateMap('job4')" data-key="job4">
+                        <div class="timeline-year">Jun 2023 - Apr 2024</div>
+                        <div class="timeline-role">Data Engineer</div>
+                    </div>
+
+                    <div class="timeline-card" onclick="updateMap('job5')" data-key="job5">
+                        <div class="timeline-year">May 2021 - Jun 2023</div>
+                        <div class="timeline-role">Data Scientist</div>
+                    </div>
+
+                    <div class="timeline-card" onclick="updateMap('job6')" data-key="job6">
+                        <div class="timeline-year">Aug 2020 - May 2021</div>
+                        <div class="timeline-role">Scientific Programmer</div>
+                    </div>
+
+                    <div class="timeline-card" onclick="updateMap('job7')" data-key="job7">
+                        <div class="timeline-year">Nov 2019 - May 2020</div>
+                        <div class="timeline-role">Data Analyst</div>
+                    </div>
+
+                    <div class="timeline-card" onclick="updateMap('job8')" data-key="job8">
+                        <div class="timeline-year">Jul 2015 - Sep 2015</div>
+                        <div class="timeline-role">Inventory Specialist</div>
+                    </div>
+
+                    <div class="timeline-card" onclick="updateMap('job9')" data-key="job9">
+                        <div class="timeline-year">Feb 2012 - May 2015</div>
+                        <div class="timeline-role">Medical Laboratory Technician</div>
+                    </div>
+
+                    <div class="timeline-card" onclick="updateMap('job10')" data-key="job10">
+                        <div class="timeline-year">May 2010 - May 2015</div>
+                        <div class="timeline-role">US Navy Corpsman</div>
+                    </div>
+
+                    <div class="timeline-card" onclick="updateMap('job11')" data-key="job11">
+                        <div class="timeline-year">Apr 2009 - Apr 2010</div>
+                        <div class="timeline-role">Restaurant Staff</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Wrapper with Spacing -->
+            <div class="map-wrapper">
+                <div id="map"></div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Summary & Details -->
+        <div class="sidebar-right">
+            <div class="employer-header">
+                <img src="assets/career/logo/logo_take2.jpg" alt="Employer Logo" class="employer-logo-img" id="sidebar-logo">
+                <div class="employer-meta">
+                    <div class="employer-name" id="sidebar-employer">Take2 IT Consulting</div>
+                    <div class="sidebar-job-title" id="sidebar-role-title">Lead Enterprise Architect</div>
+                    <div class="sidebar-dates" id="sidebar-year">Aug 2026 - Present</div>
+                </div>
+            </div>
+
+            <div>
+                <div class="section-title">Overview</div>
+                <div class="section-content" id="sidebar-role-info"></div>
+            </div>
+
+            <div>
+                <div class="section-title">Contract Details</div>
+                <div class="contract-grid" id="sidebar-contract"></div>
+            </div>
+
+            <div id="clearance-section" style="display: none;">
+                <div class="section-title">Security Clearance</div>
+                <div class="contract-grid" id="sidebar-clearance"></div>
+            </div>
+
+            <div>
+                <div class="section-title">Employer Details</div>
+                <div class="contract-grid" id="sidebar-contact"></div>
+            </div>
+
+            <div>
+                <div class="section-title">Location & Context</div>
+                <div class="location-badges-grid" id="sidebar-locations"></div>
+            </div>
+
+            <div>
+                <div class="section-title">Skills & Technologies</div>
+                <div class="skills-grid" id="sidebar-skills"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MapLibre GL JS -->
+    <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+    <!-- Custom Career JS -->
+    <script src="scripts/career.js"></script>
+</body>
+</html>

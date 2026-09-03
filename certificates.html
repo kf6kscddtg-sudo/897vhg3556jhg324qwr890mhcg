@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio App - Certificates</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #000000;
+            font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            grid-template-rows: 1fr;
+            height: 100vh;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+            transition: grid-template-columns 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body.nav-collapsed {
+            grid-template-columns: 60px 1fr;
+        }
+
+        /* --- Leftmost Navigation Panel --- */
+        .nav-panel {
+            background: #fff;
+            border-right: 1px solid #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            z-index: 1005;
+            position: relative;
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 35px 20px 15px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            white-space: nowrap;
+            transition: padding 0.3s ease;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .app-logo {
+            width: 22px;
+            height: 22px;
+            background: #000;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            border-radius: 4px;
+            flex-shrink: 0;
+            letter-spacing: 0px;
+        }
+
+        .collapse-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            flex-shrink: 0;
+        }
+
+        .collapse-btn svg {
+            width: 14px;
+            height: 14px;
+            stroke: #000;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: transform 0.3s ease;
+        }
+
+        .collapsed-logo-header {
+            display: none;
+            cursor: pointer;
+        }
+
+        body.nav-collapsed .header-brand,
+        body.nav-collapsed .collapse-btn {
+            display: none;
+        }
+
+        body.nav-collapsed .panel-header {
+            padding: 25px 0;
+            justify-content: center;
+            border-bottom: none;
+        }
+
+        body.nav-collapsed .collapsed-logo-header {
+            display: flex;
+        }
+
+        .nav-scroll {
+            overflow-y: auto;
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-height: calc(100vh - 70px);
+            scrollbar-width: none;
+        }
+
+        .nav-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .nav-category {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: #777;
+            cursor: pointer;
+            padding: 6px 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .nav-category:hover {
+            background-color: #fcfcfc;
+            color: #000;
+        }
+
+        .nav-category.active-category {
+            background-color: #f4f4f4;
+            color: #000;
+            font-weight: 700;
+        }
+
+        .nav-category.active-category svg {
+            stroke: #000;
+        }
+
+        .nav-category svg {
+            width: 14px;
+            height: 14px;
+            stroke: #777;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+        .nav-sublist {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding-left: 22px;
+            border-left: 1px solid #f0f0f0;
+            margin-left: 14px;
+            margin-top: 2px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        body.nav-collapsed .nav-sublist {
+            display: none !important;
+        }
+
+        .nav-item {
+            font-size: 10px;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            padding: 3px 6px;
+            border-radius: 3px;
+            transition: color 0.2s ease, background 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: #000;
+            background-color: #f7f7f7;
+            font-weight: 500;
+        }
+
+        body.nav-collapsed .nav-category .category-text {
+            display: none;
+        }
+
+        body.nav-collapsed .nav-scroll {
+            padding: 20px 8px;
+            align-items: center;
+        }
+
+        body.nav-collapsed .nav-category {
+            justify-content: center;
+            padding: 8px;
+            width: 36px;
+            height: 36px;
+        }
+
+        /* --- Main Content Area --- */
+        .main-content {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow-y: auto;
+            background: #ffffff;
+            padding: 40px;
+        }
+
+        .content-scroll {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .page-hero {
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 20px;
+        }
+
+        .page-title {
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #000;
+            margin-bottom: 6px;
+        }
+
+        .page-subtitle {
+            font-size: 11px;
+            color: #666;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- Tables Styling --- */
+        .table-section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .table-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #000;
+        }
+
+        .data-table-container {
+            border: 1px solid #f0f0f0;
+            background: #fcfcfc;
+            overflow-x: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 11px;
+        }
+
+        .data-table th {
+            background: #f7f7f7;
+            color: #000;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            white-space: nowrap;
+        }
+
+        .data-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #333;
+            white-space: nowrap;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tr:hover td {
+            background: #ffffff;
+            color: #000;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 3px;
+        }
+
+        .badge.active {
+            background: #e6f4ea;
+            color: #137333;
+        }
+
+        .badge.verified {
+            background: #e8f0fe;
+            color: #1a73e8;
+        }
+
+        /* --- Mobile Toggle Bar --- */
+        .mobile-toggle-bar {
+            display: none;
+            background: #ffffff;
+            color: #000000;
+            border-bottom: 1px solid #f0f0f0;
+            padding: 10px 16px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1010;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .mobile-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .burger-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            padding: 0;
+        }
+
+        .burger-line {
+            width: 18px;
+            height: 2px;
+            background-color: #000;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        body.mobile-menu-open .burger-line:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        body.mobile-menu-open .burger-line:nth-child(2) {
+            opacity: 0;
+        }
+        body.mobile-menu-open .burger-line:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .mobile-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+        }
+
+        body.mobile-menu-open .mobile-backdrop {
+            display: block;
+        }
+
+        @media (max-width: 1024px) {
+            body {
+                display: flex;
+                flex-direction: column;
+                height: 100vh;
+                overflow-y: auto;
+                padding-top: 45px;
+            }
+
+            body.nav-collapsed {
+                grid-template-columns: none;
+            }
+
+            .mobile-toggle-bar {
+                display: flex;
+            }
+
+            .nav-panel {
+                position: fixed;
+                top: 45px;
+                left: 0;
+                width: 260px !important;
+                height: calc(100vh - 45px);
+                border-right: 1px solid #f0f0f0;
+                border-bottom: none;
+                transform: translateX(-100%);
+                z-index: 1005;
+                box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+            }
+
+            body.mobile-menu-open .nav-panel {
+                transform: translateX(0);
+            }
+
+            body.mobile-menu-open .nav-panel .panel-header {
+                display: none !important;
+            }
+
+            body.mobile-menu-open .nav-panel .nav-scroll {
+                padding: 20px 15px !important;
+                align-items: stretch !important;
+                max-height: 100vh !important;
+            }
+
+            body.mobile-menu-open .nav-panel .nav-category {
+                justify-content: flex-start !important;
+                padding: 6px 8px !important;
+                width: auto !important;
+                height: auto !important;
+            }
+
+            body.mobile-menu-open .nav-panel .nav-category .category-text {
+                display: inline !important;
+            }
+
+            body.mobile-menu-open .nav-panel .nav-sublist {
+                display: flex !important;
+            }
+
+            .main-content {
+                width: 100%;
+                height: auto;
+                flex-shrink: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Mobile Header Bar -->
+    <div class="mobile-toggle-bar">
+        <div class="mobile-brand" onclick="window.location.href='home.html'">
+            <div class="app-logo">PA</div>
+            <span>Portfolio App — Certificates</span>
+        </div>
+        <button class="burger-btn" onclick="toggleMobileMenu()" aria-label="Toggle Menu">
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+        </button>
+    </div>
+
+    <!-- Backdrop for mobile drawer -->
+    <div class="mobile-backdrop" onclick="toggleMobileMenu()"></div>
+
+    <!-- Leftmost Navigation Panel -->
+    <div class="nav-panel">
+        <div class="panel-header">
+            <div class="header-brand" onclick="window.location.href='home.html'">
+                <div class="app-logo">PA</div>
+                <span class="header-text">Portfolio App</span>
+            </div>
+            <button class="collapse-btn" onclick="toggleNav()" title="Toggle Menu">
+                <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <div class="app-logo collapsed-logo-header" onclick="window.location.href='home.html'" title="Home">PA</div>
+        </div>
+        <div class="nav-scroll">
+            <div class="nav-group">
+                <div class="nav-category" onclick="window.location.href='home.html'" title="Home">
+                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <span class="category-text">Home</span>
+                </div>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-category" onclick="window.location.href='career.html'" title="Career">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    <span class="category-text">Career</span>
+                </div>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-category" onclick="window.location.href='education.html'" title="Education">
+                    <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                    <span class="category-text">Education</span>
+                </div>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-category" onclick="window.location.href='projects.html'" title="Sample Projects">
+                    <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                    <span class="category-text">Sample Projects</span>
+                </div>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-category active-category" onclick="window.location.href='certificates.html'" title="Certificates">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+                    <span class="category-text">Certificates</span>
+                </div>
+                <div class="nav-sublist">
+                    <div class="nav-item active" onclick="window.location.href='certificates.html'">University</div>
+                    <div class="nav-item" onclick="window.location.href='certificates.html'">DoW (Active)</div>
+                    <div class="nav-item" onclick="window.location.href='certificates.html'">Employment</div>
+                    <div class="nav-item" onclick="window.location.href='certificates.html'">Continuing Education</div>
+                </div>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-category" onclick="window.location.href='ventures.html'" title="Financial Assets and Business Ventures">
+                    <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    <span class="category-text">Financial Assets & Ventures</span>
+                </div>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-category" onclick="window.location.href='lifestyle.html'" title="Minimalistic Lifestyle">
+                    <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                    <span class="category-text">Minimalistic Lifestyle</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="content-scroll">
+            <div class="page-hero">
+                <h1 class="page-title">Certificates & Licenses</h1>
+                <p class="page-subtitle">University credentials, active Department of War clearances, employment records, and continuing education logs.</p>
+            </div>
+
+            <!-- Complete Table Formats Grouped By Category -->
+            <div class="table-section">
+                <div class="table-title">University Credentials</div>
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Credential / Degree Name</th>
+                                <th>Category</th>
+                                <th>Issuing Institution</th>
+                                <th>Date Awarded</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Master of Science in Information Systems Technology (MSIST)</td>
+                                <td>University</td>
+                                <td>Accredited University</td>
+                                <td>May 2021</td>
+                                <td><span class="badge verified">Verified</span></td>
+                            </tr>
+                            <tr>
+                                <td>Bachelor of Business Administration in ISTM</td>
+                                <td>University</td>
+                                <td>Accredited University</td>
+                                <td>May 2018</td>
+                                <td><span class="badge verified">Verified</span></td>
+                            </tr>
+                            <tr>
+                                <td>Associate of Science in Health Science (MLT)</td>
+                                <td>University</td>
+                                <td>Medical Technical Institute</td>
+                                <td>December 2015</td>
+                                <td><span class="badge verified">Verified</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="table-section">
+                <div class="table-title">Department of War (DoW) Clearances & Active Certifications</div>
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Credential / License Name</th>
+                                <th>Category</th>
+                                <th>Issuing Authority</th>
+                                <th>Expiration Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Secret / Top Secret Security Clearance</td>
+                                <td>DoW (Active)</td>
+                                <td>Department of Defense / War</td>
+                                <td>Active Status</td>
+                                <td><span class="badge active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>US Navy Hospital Corpsman Rating Certification</td>
+                                <td>DoW (Active)</td>
+                                <td>United States Navy</td>
+                                <td>Active / Veteran Reserve</td>
+                                <td><span class="badge active">Active</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="table-section">
+                <div class="table-title">Employment & Technical Competencies</div>
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Competency / Role Cert</th>
+                                <th>Category</th>
+                                <th>Issuing Entity</th>
+                                <th>Date Earned</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Enterprise Architect Framework Certification</td>
+                                <td>Employment</td>
+                                <td>Internal Architecture Board</td>
+                                <td>January 2023</td>
+                                <td><span class="badge verified">Verified</span></td>
+                            </tr>
+                            <tr>
+                                <td>Advanced Pipeline Engineering Specialization</td>
+                                <td>Employment</td>
+                                <td>Data Infrastructure Group</td>
+                                <td>August 2022</td>
+                                <td><span class="badge verified">Verified</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="table-section">
+                <div class="table-title">Continuing Education & Specializations</div>
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Course / Program Name</th>
+                                <th>Category</th>
+                                <th>Platform / Organization</th>
+                                <th>Completion Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Large Language Models & Neural Networks</td>
+                                <td>Continuing Education</td>
+                                <td>Advanced Tech Institute</td>
+                                <td>November 2025</td>
+                                <td><span class="badge verified">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>Cloud Architecture & Distributed Scalability</td>
+                                <td>Continuing Education</td>
+                                <td>Cloud Systems Academy</td>
+                                <td>March 2024</td>
+                                <td><span class="badge verified">Completed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleNav() {
+            if (window.innerWidth <= 1024) {
+                toggleMobileMenu();
+            } else {
+                document.body.classList.toggle('nav-collapsed');
+            }
+        }
+
+        function toggleMobileMenu() {
+            document.body.classList.toggle('mobile-menu-open');
+        }
+    </script>
+</body>
+</html>

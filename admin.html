@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Admin Dashboard</title>
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        .admin-wrap { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        .admin-card { background: #fff; border: 1px solid #e5e5e5; border-radius: 6px; padding: 24px; margin-bottom: 20px; }
+        .request-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
+        .request-item:last-child { border-bottom: none; }
+        .approve-btn { background: #166534; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; font-size: 9px; font-weight: 600; text-transform: uppercase; cursor: pointer; }
+        .approve-btn:hover { background: #14532d; }
+        .badge-approved { color: #166534; background: #f0fdf4; border: 1px solid #bbf7d0; padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 600; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="header-brand">
+                <span class="header-title">Admin Dashboard</span>
+            </a>
+        </div>
+    </header>
+
+    <div class="admin-wrap">
+        <!-- Login Form for Admin -->
+        <div id="adminLoginCard" class="admin-card">
+            <h2>Admin Authentication</h2>
+            <p class="form-desc" style="margin-bottom: 15px;">Enter master password to access requests.</p>
+            <div class="form-group" style="margin-bottom: 12px;">
+                <input type="password" id="adminPassword" placeholder="Master Password">
+            </div>
+            <button onclick="authAdmin()" class="submit-btn">Unlock Dashboard</button>
+            <div id="adminLoginError" class="message-box error" style="margin-top: 10px; display: none;"></div>
+        </div>
+
+        <!-- Requests Panel (Hidden until unlocked) -->
+        <div id="adminPanelCard" class="admin-card" style="display: none;">
+            <h2>Access Requests Queue</h2>
+            <p class="form-desc" style="margin-bottom: 15px;">Approve users to grant them portfolio entry.</p>
+            <div id="requestsList"></div>
+        </div>
+    </div>
+
+    <script>
+        // Simple client-side master password check
+        const MASTER_PASS = "admin123"; // Change this to your secure password
+
+        function authAdmin() {
+            const pass = document.getElementById('adminPassword').value;
+            if (pass === MASTER_PASS) {
+                document.getElementById('adminLoginCard').style.display = 'none';
+                document.getElementById('adminPanelCard').style.display = 'block';
+                loadRequests();
+            } else {
+                const err = document.getElementById('adminLoginError');
+                err.style.display = 'block';
+                err.innerText = 'Incorrect master password.';
+            }
+        }
+
+        function loadRequests() {
+            const listContainer = document.getElementById('requestsList');
+            listContainer.innerHTML = '';
+
+            let found = false;
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('portfolioUser_')) {
+                    found = true;
+                    const user = JSON.parse(localStorage.getItem(key));
+                    
+                    const div = document.createElement('div');
+                    div.className = 'request-item';
+                    div.innerHTML = `
+                        <div>
+                            <strong style="font-size: 11px; text-transform: uppercase;">${user.firstName} ${user.lastName}</strong><br>
+                            <span style="font-size: 10px; color: #666;">${user.email} | ${user.phone}</span><br>
+                            <span style="font-size: 9px; color: #888; font-family: monospace;">Passcode: ${user.passcode}</span>
+                        </div>
+                        <div>
+                            ${user.status === 'approved' 
+                                ? '<span class="badge-approved">Approved</span>' 
+                                : `<button class="approve-btn" onclick="approveUser('${user.email}')">Approve</button>`}
+                        </div>
+                    `;
+                    listContainer.appendChild(div);
+                }
+            }
+
+            if (!found) {
+                listContainer.innerHTML = '<p style="font-size: 10.5px; color: #666;">No access requests found.</p>';
+            }
+        }
+
+        function approveUser(email) {
+            const recordKey = 'portfolioUser_' + email;
+            const user = JSON.parse(localStorage.getItem(recordKey));
+            user.status = 'approved';
+            localStorage.setItem(recordKey, JSON.stringify(user));
+            loadRequests();
+        }
+    </script>
+</body>
+</html>

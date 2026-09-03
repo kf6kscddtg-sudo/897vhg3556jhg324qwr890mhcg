@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio App - Education & Military Training</title>
+    <!-- MapLibre GL CSS -->
+    <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
+    <!-- Custom Career & Education CSS -->
+    <link href="css/career.css" rel="stylesheet" />
+    <link href="css/education.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- Full-Width Global Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="home.html" class="header-brand">
+                <img src="assets/logo/logo.png" alt="App Logo" class="app-logo-img">
+                <span class="header-title">Portfolio</span>
+            </a>
+
+            <!-- Desktop Global Navigation -->
+            <nav class="desktop-nav">
+                <a href="home.html" class="nav-link">Home</a>
+                <a href="career.html" class="nav-link">Career</a>
+                <a href="education.html" class="nav-link active">Education</a>
+                <a href="projects.html" class="nav-link">Projects</a>
+                <a href="certificates.html" class="nav-link">Certificates</a>
+                <a href="financial.html" class="nav-link">Financial</a>
+                <a href="minimalism.html" class="nav-link">Minimalism</a>
+            </nav>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown Navigation -->
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="home.html" class="mobile-nav-link">Home</a>
+            <a href="career.html" class="mobile-nav-link">Career</a>
+            <a href="education.html" class="mobile-nav-link active">Education</a>
+            <a href="projects.html" class="mobile-nav-link">Projects</a>
+            <a href="certificates.html" class="mobile-nav-link">Certificates</a>
+            <a href="financial.html" class="mobile-nav-link">Financial</a>
+            <a href="minimalism.html" class="mobile-nav-link">Minimalism</a>
+        </nav>
+    </header>
+
+    <!-- Main Workspace Split Layout: Upper 50vh Map/Timeline, Lower 50vh Gallery -->
+    <div class="education-workspace">
+        
+        <!-- UPPER SECTION: Local Nav Panel, Timeline Ribbon, and Map -->
+        <div class="education-upper-section">
+            <!-- Left Local Navigation Panel -->
+            <div class="nav-panel">
+                <div class="panel-header">
+                    <span>Education & Service</span>
+                </div>
+                <div class="nav-scroll" id="eduNavScroll">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+
+            <!-- Center Container: Top Timeline Ribbon & Map Area -->
+            <div class="center-container">
+                <div class="timeline-top-container" id="timelineContainer">
+                    <div class="timeline-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="header-text">Timeline & Milestones</span>
+                        <div class="satellite-toggle-wrapper" style="display: flex; align-items: center; gap: 8px;">
+                            <span class="satellite-toggle-label" style="font-size: 9px; font-weight: 600; text-transform: uppercase; color: #444444;">Satellite Mode</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="satelliteModeToggle" onchange="toggleSatelliteMode(this)">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="timeline-scroll" id="eduTimelineScroll">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+
+                <!-- Map Wrapper -->
+                <div class="map-wrapper">
+                    <div id="map"></div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Summary & Details -->
+            <div class="sidebar-right">
+                <div class="employer-header">
+                    <img src="assets/education/logo_gwu.jpg" alt="Institution Logo" class="employer-logo-img" id="sidebar-logo">
+                    <div class="employer-meta">
+                        <div class="employer-name" id="sidebar-employer">GWU School of Business</div>
+                        <div class="sidebar-job-title" id="sidebar-role-title">M.S. in Information Systems & Technology</div>
+                        <div class="sidebar-dates" id="sidebar-year">Masters Degree</div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="section-title">Overview</div>
+                    <div class="section-content" id="sidebar-role-info"></div>
+                </div>
+
+                <div>
+                    <div class="section-title">Credential Details</div>
+                    <div class="contract-grid" id="sidebar-contract"></div>
+                </div>
+
+                <div>
+                    <div class="section-title">Locations & Context</div>
+                    <div class="location-badges-grid" id="sidebar-locations"></div>
+                </div>
+
+                <div>
+                    <div class="section-title">Focus Areas & Skills</div>
+                    <div class="skills-grid" id="sidebar-skills"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOWER SECTION: Image & Credential Gallery (50vh) -->
+        <div class="education-lower-section">
+            <div class="gallery-header-row">
+                <span class="section-title" style="margin-bottom:0;">Credential & Station Gallery</span>
+                <span class="gallery-hint">Click any timeline item above to highlight its gallery card</span>
+            </div>
+            <div class="edu-gallery-grid" id="eduGalleryGrid">
+                <!-- Gallery cards populated dynamically via JS -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- MapLibre GL JS -->
+    <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+    <!-- Custom Education JS -->
+    <script src="scripts/education.js"></script>
+</body>
+</html>

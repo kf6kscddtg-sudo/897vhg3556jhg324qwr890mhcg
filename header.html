@@ -1,0 +1,132 @@
+<!-- Mobile Header Bar -->
+<div class="mobile-toggle-bar">
+    <div class="mobile-brand" onclick="window.location.href='home.html'">
+        <div class="app-logo">PA</div>
+        <span id="mobileBrandText">Portfolio App — Home</span>
+    </div>
+    <button class="burger-btn" onclick="toggleNav()" aria-label="Toggle Menu">
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+    </button>
+</div>
+
+<!-- Backdrop for mobile drawer -->
+<div class="mobile-backdrop" onclick="toggleNav()"></div>
+
+<!-- Leftmost Navigation Panel -->
+<div class="nav-panel">
+    <div class="panel-header">
+        <div class="header-brand" onclick="window.location.href='home.html'">
+            <div class="app-logo">PA</div>
+            <span class="header-text">Portfolio App</span>
+        </div>
+        <button class="collapse-btn" onclick="toggleNav()" title="Toggle Menu">
+            <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+    </div>
+    <div class="app-logo collapsed-logo-header" onclick="window.location.href='home.html'" title="Home" style="margin: 20px auto; display:none;">PA</div>
+    
+    <div class="nav-scroll">
+        <!-- Home Section -->
+        <div class="nav-group">
+            <div class="nav-category" data-page="home.html" onclick="window.location.href='home.html'" title="Home">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span class="category-text">Home</span>
+            </div>
+        </div>
+
+        <!-- Career Section -->
+        <div class="nav-group">
+            <div class="nav-category" data-page="career.html" onclick="window.location.href='career.html'" title="Career">
+                <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                <span class="category-text">Career</span>
+            </div>
+            <div class="nav-sublist">
+                <div class="nav-item" onclick="window.location.href='career.html?role=Lead%20Enterprise%20Architect'">Lead Enterprise Architect</div>
+                <div class="nav-item" onclick="window.location.href='career.html?role=AI%20Generalist'">AI Generalist</div>
+                <div class="nav-item" onclick="window.location.href='career.html?role=Senior%20Data%20Pipeline%20Engineer'">Senior Data Pipeline Engineer</div>
+                <div class="nav-item" onclick="window.location.href='career.html?role=Data%20Engineer'">Data Engineer</div>
+                <div class="nav-item" onclick="window.location.href='career.html?role=Data%20Scientist'">Data Scientist</div>
+                <div class="nav-item" onclick="window.location.href='career.html?role=Scientific%20Programmer%20II'">Scientific Programmer II</div>
+                <div class="nav-item" onclick="window.location.href='career.html?role=Data%20Analyst%20Intern'">Data Analyst Intern</div>
+                <div class="nav-item" onclick="window.location.href='career.html?role=Inventory%20Specialist'">Inventory Specialist</div>
+                <div class="nav-item" onclick="window.location.href='career.html?role=Medical%20Laboratory%20Technician'">Medical Laboratory Technician</div>
+                <div class="nav-item" onclick="window.location.href='career.html?role=US%20Navy%20Corpsman'">US Navy Corpsman</div>
+                <div class="nav-item" onclick="window.location.href='career.html?role=Kitchen%20Staff%20%2F%20Server'">Kitchen Staff / Server</div>
+            </div>
+        </div>
+
+        <!-- Education Section -->
+        <div class="nav-group">
+            <div class="nav-category" data-page="education.html" onclick="window.location.href='education.html'" title="Education">
+                <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                <span class="category-text">Education</span>
+            </div>
+            <div class="nav-sublist">
+                <div class="nav-item" onclick="window.location.href='education.html'">MSIST</div>
+                <div class="nav-item" onclick="window.location.href='education.html'">BBA ISTM</div>
+                <div class="nav-item" onclick="window.location.href='education.html'">ASHS MLT</div>
+                <div class="nav-item" onclick="window.location.href='education.html'">USN San Diego</div>
+                <div class="nav-item" onclick="window.location.href='education.html'">USN Texas</div>
+                <div class="nav-item" onclick="window.location.href='education.html'">US Navy Corps School</div>
+                <div class="nav-item" onclick="window.location.href='education.html'">US Navy Bootcamp</div>
+            </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="nav-group">
+            <div class="nav-category" data-page="projects.html" onclick="window.location.href='projects.html'" title="Sample Projects">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                <span class="category-text">Sample Projects</span>
+            </div>
+        </div>
+
+        <!-- Certificates Section -->
+        <div class="nav-group">
+            <div class="nav-category" data-page="certificates.html" onclick="window.location.href='certificates.html'" title="Certificates">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+                <span class="category-text">Certificates</span>
+            </div>
+            <div class="nav-sublist">
+                <div class="nav-item" onclick="window.location.href='certificates.html'">University</div>
+                <div class="nav-item" onclick="window.location.href='certificates.html'">DoW (Active)</div>
+                <div class="nav-item" onclick="window.location.href='certificates.html'">Employment</div>
+                <div class="nav-item" onclick="window.location.href='certificates.html'">Continuing Education</div>
+            </div>
+        </div>
+
+        <!-- Financial Assets & Ventures -->
+        <div class="nav-group">
+            <div class="nav-category" data-page="ventures.html" onclick="window.location.href='ventures.html'" title="Financial Assets and Business Ventures">
+                <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <span class="category-text">Financial Assets & Ventures</span>
+            </div>
+            <div class="nav-sublist">
+                <div class="nav-item" onclick="window.location.href='ventures.html'">All Assets</div>
+                <div class="nav-item" onclick="window.location.href='ventures.html'">Semi Conductors</div>
+                <div class="nav-item" onclick="window.location.href='ventures.html'">Technology Sector</div>
+                <div class="nav-item" onclick="window.location.href='ventures.html'">Broad Market</div>
+                <div class="nav-item" onclick="window.location.href='ventures.html'">Real Estate (Active)</div>
+            </div>
+        </div>
+
+        <!-- Minimalistic Lifestyle -->
+        <div class="nav-group">
+            <div class="nav-category" data-page="lifestyle.html" onclick="window.location.href='lifestyle.html'" title="Minimalistic Lifestyle">
+                <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                <span class="category-text">Minimalistic Lifestyle</span>
+            </div>
+            <div class="nav-sublist">
+                <div class="nav-item" onclick="window.location.href='lifestyle.html'">All Physical</div>
+                <div class="nav-item" onclick="window.location.href='lifestyle.html'">Clothing</div>
+                <div class="nav-item" onclick="window.location.href='lifestyle.html'">Bathroom</div>
+                <div class="nav-item" onclick="window.location.href='lifestyle.html'">Kitchen</div>
+                <div class="nav-item" onclick="window.location.href='lifestyle.html'">Office and Documents</div>
+                <div class="nav-item" onclick="window.location.href='lifestyle.html'">Emergency Go Home</div>
+                <div class="nav-item" onclick="window.location.href='lifestyle.html'">Emergency In (Active)</div>
+                <div class="nav-item" onclick="window.location.href='lifestyle.html'">Emergency Out (Active)</div>
+            </div>
+        </div>
+    </div>
+</div>

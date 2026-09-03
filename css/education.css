@@ -1,0 +1,180 @@
+/* --- Education Layout Split (Adjusted Proportions) --- */
+.education-workspace {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 70px);
+    overflow: hidden;
+    background: #fafafa;
+}
+
+/* Upper Section takes ~70% of viewport height (Map & Timeline) */
+.education-upper-section {
+    height: 68vh;
+    display: grid;
+    grid-template-columns: 260px 1fr 310px;
+    grid-template-rows: 1fr;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+/* Lower Section takes ~32% for the Image Gallery (roughly half of the upper map area) */
+.education-lower-section {
+    height: 32vh;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 30px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
+}
+
+.education-lower-section::-webkit-scrollbar {
+    width: 6px;
+    height: 6px; /* Horizontal scrollbar support for large screens */
+}
+
+.education-lower-section::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+
+/* Gallery Header Row (Titles & Notes hidden completely) */
+.gallery-header-row {
+    display: none !important;
+}
+
+.gallery-hint {
+    display: none !important;
+}
+
+/* Gallery Grid & Cards (Default Vertical for Mobile / Small Screens) */
+.edu-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    padding-bottom: 10px;
+}
+
+.edu-gallery-card {
+    background: #fafafa;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.edu-gallery-card:hover {
+    border-color: #444444;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.edu-gallery-card.active-gallery-card {
+    border-color: #444444;
+    box-shadow: 0 0 0 2px #444444;
+    background: #ffffff;
+}
+
+.edu-gallery-img-wrapper {
+    width: 100%;
+    height: 85px;
+    background: #eeeeee;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.edu-gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.edu-gallery-card:hover .edu-gallery-img {
+    transform: scale(1.03);
+}
+
+.edu-gallery-body {
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex-grow: 1;
+}
+
+.edu-gallery-category {
+    font-size: 7.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888888;
+}
+
+.edu-gallery-title {
+    font-size: 9.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: #111111;
+    line-height: 1.2;
+}
+
+.edu-gallery-loc {
+    font-size: 8.5px;
+    color: #555555;
+    margin-top: auto;
+    padding-top: 2px;
+}
+
+/* Large Screens (1025px and above): Horizontal Left-to-Right Gallery Scroll */
+@media (min-width: 1025px) {
+    .education-lower-section {
+        overflow-y: hidden; /* Prevent vertical scrolling in lower section on wide screens */
+        overflow-x: auto;   /* Enable horizontal scroll container */
+    }
+
+    .edu-gallery-grid {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 16px;
+        width: max-content;
+        padding-bottom: 6px;
+    }
+
+    .edu-gallery-card {
+        flex: 0 0 220px; /* Fixed card width for horizontal row */
+    }
+}
+
+/* Responsive Handling (Mobile / Small Screens) */
+@media (max-width: 1024px) {
+    .education-workspace {
+        height: auto;
+        overflow: auto;
+    }
+    .education-upper-section {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+    }
+    .education-upper-section .nav-panel {
+        display: none !important;
+    }
+    .education-upper-section .map-wrapper {
+        height: 350px;
+    }
+    .education-lower-section {
+        height: auto;
+        overflow-y: visible;
+        padding: 20px;
+    }
+}

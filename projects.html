@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio App - Projects</title>
+    <!-- Custom Projects CSS -->
+    <link href="css/projects.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- Full-Width Global Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <!-- Brand Logo & Title -->
+            <a href="home.html" class="header-brand">
+                <img src="assets/logo/logo.png" alt="App Logo" class="app-logo-img">
+                <span class="header-title">Portfolio</span>
+            </a>
+
+            <!-- Desktop Global Navigation -->
+            <nav class="desktop-nav">
+                <a href="home.html" class="nav-link">Home</a>
+                <a href="career.html" class="nav-link">Career</a>
+                <a href="education.html" class="nav-link">Education</a>
+                <a href="projects.html" class="nav-link active">Projects</a>
+                <a href="certificates.html" class="nav-link">Certificates</a>
+                <a href="financial.html" class="nav-link">Financial</a>
+                <a href="minimalism.html" class="nav-link">Minimalism</a>
+            </nav>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown Navigation -->
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="home.html" class="mobile-nav-link">Home</a>
+            <a href="career.html" class="mobile-nav-link">Career</a>
+            <a href="education.html" class="mobile-nav-link">Education</a>
+            <a href="projects.html" class="mobile-nav-link active">Projects</a>
+            <a href="certificates.html" class="mobile-nav-link">Certificates</a>
+            <a href="financial.html" class="mobile-nav-link">Financial</a>
+            <a href="minimalism.html" class="mobile-nav-link">Minimalism</a>
+        </nav>
+    </header>
+
+    <!-- Main Workspace Layout -->
+    <div class="workspace-layout">
+        <!-- Left Local Navigation Panel -->
+        <div class="nav-panel">
+            <div class="panel-header">
+                <span>Featured Projects</span>
+            </div>
+            <div class="nav-scroll">
+                <div class="nav-item" onclick="selectCardByProject('Enterprise Palantir Pipeline', event)">Enterprise Palantir Pipeline</div>
+                <div class="nav-item" onclick="selectCardByProject('AI Decision Support Agent', event)">AI Decision Support Agent</div>
+                <div class="nav-item" onclick="selectCardByProject('Automated Lakehouse ETL', event)">Automated Lakehouse ETL</div>
+                <div class="nav-item" onclick="selectCardByProject('Geospatial Analytics Dashboard', event)">Geospatial Analytics Dashboard</div>
+            </div>
+        </div>
+
+        <!-- Center Container: Top Ribbon & Gallery Grid Area -->
+        <div class="center-container">
+            <!-- Timeline Ribbon Panel at Top -->
+            <div class="timeline-top-container" id="timelineContainer">
+                <div class="timeline-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="header-text">Project Timeline & Milestones</span>
+                </div>
+                <div class="timeline-scroll">
+                    <div class="timeline-card" onclick="updateGallery('proj1')" data-key="proj1">
+                        <div class="timeline-year">2026 - Present</div>
+                        <div class="timeline-role">Enterprise Palantir Pipeline</div>
+                    </div>
+
+                    <div class="timeline-card" onclick="updateGallery('proj2')" data-key="proj2">
+                        <div class="timeline-year">2025 - 2026</div>
+                        <div class="timeline-role">AI Decision Support Agent</div>
+                    </div>
+
+                    <div class="timeline-card" onclick="updateGallery('proj3')" data-key="proj3">
+                        <div class="timeline-year">2024 - 2025</div>
+                        <div class="timeline-role">Automated Lakehouse ETL</div>
+                    </div>
+
+                    <div class="timeline-card" onclick="updateGallery('proj4')" data-key="proj4">
+                        <div class="timeline-year">2023 - 2024</div>
+                        <div class="timeline-role">Geospatial Analytics Dashboard</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Wrapper Replacing the Map Space -->
+            <div class="gallery-wrapper">
+                <div class="gallery-grid" id="projectGalleryContainer">
+                    <!-- Dynamic Gallery Cards will be loaded here via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Summary & Details -->
+        <div class="sidebar-right">
+            <div class="employer-header">
+                <img src="assets/projects/logo/default_proj.jpg" alt="Project Logo" class="employer-logo-img" id="sidebar-logo">
+                <div class="employer-meta">
+                    <div class="employer-name" id="sidebar-employer">Enterprise Architecture</div>
+                    <div class="sidebar-job-title" id="sidebar-role-title">Enterprise Palantir Pipeline</div>
+                    <div class="sidebar-dates" id="sidebar-year">2026 - Present</div>
+                </div>
+            </div>
+
+            <div>
+                <div class="section-title">Overview</div>
+                <div class="section-content" id="sidebar-role-info"></div>
+            </div>
+
+            <div>
+                <div class="section-title">Architecture Specs</div>
+                <div class="contract-grid" id="sidebar-contract"></div>
+            </div>
+
+            <div>
+                <div class="section-title">Key Artifacts</div>
+                <div class="contract-grid" id="sidebar-contact"></div>
+            </div>
+
+            <div>
+                <div class="section-title">Deployments & Environments</div>
+                <div class="location-badges-grid" id="sidebar-locations"></div>
+            </div>
+
+            <div>
+                <div class="section-title">Tech Stack & Tools</div>
+                <div class="skills-grid" id="sidebar-skills"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Projects JS -->
+    <script src="scripts/projects.js"></script>
+</body>
+</html>

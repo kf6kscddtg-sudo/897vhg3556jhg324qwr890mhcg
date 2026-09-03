@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Access Portal</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="header-brand">
+                <img src="assets/logo/logo.png" alt="App Logo" class="app-logo-img">
+                <span class="header-title">Portfolio App</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="auth-container">
+            <!-- Tabs Switcher -->
+            <div class="auth-tabs">
+                <button class="tab-btn active" onclick="switchTab('request')">Request Access</button>
+                <button class="tab-btn" onclick="switchTab('login')">Login</button>
+            </div>
+
+            <!-- Request Access Form -->
+            <form id="requestForm" class="auth-form active" onsubmit="handleRequest(event)">
+                <h2>Request Access</h2>
+                <p class="form-desc">Enter your details to generate an instant entry passcode.</p>
+                
+                <div class="form-group">
+                    <label for="firstName">First Name *</label>
+                    <input type="text" id="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name *</label>
+                    <input type="text" id="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Request</button>
+                <div id="requestMessage" class="message-box"></div>
+            </form>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form" onsubmit="handleLogin(event)">
+                <h2>Member Login</h2>
+                <p class="form-desc">Enter your email and assigned passcode.</p>
+
+                <div class="form-group">
+                    <label for="loginEmail">Email Address *</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="passcode">Passcode *</label>
+                    <input type="text" id="passcode" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Login</button>
+                <div id="loginMessage" class="message-box"></div>
+            </form>
+        </div>
+    </main>
+
+    <script src="scripts/index.js"></script>
+</body>
+</html>
